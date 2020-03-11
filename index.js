@@ -51,7 +51,7 @@ server.get('/api/users/:id', (req, res) => {
 server.delete('/api/users/:id', (req, res) => {
     const userRequested = req.params;
     console.log(userRequested.id)
-    const foundUser = users.find(user => user.id !== userRequested.id);
+    const foundUser = users.find(user => user.id === userRequested.id);
 
     console.log(foundUser)
     if (!foundUser) {
@@ -59,7 +59,7 @@ server.delete('/api/users/:id', (req, res) => {
     }
     else {
 
-        users = users.filter(user => user === foundUser);
+        users = users.filter(user => user !== foundUser);
 
         res.status(200).json({message: "User has been deleted"});
     }
@@ -70,7 +70,7 @@ server.delete('/api/users/:id', (req, res) => {
 //     const userRequested = req.params;
 //     const editedUser = req.body;
 
-//     const foundUser = users.find(user => user.id !== userRequested.id);
+//     const foundUser = users.find(user => user.id === userRequested.id);
 
 //     if (!foundUser) {
 //         res.status(404).json({message: "The user with the specified ID does not exist"})
@@ -80,6 +80,7 @@ server.delete('/api/users/:id', (req, res) => {
 //     }
 //     else {
 //         //delete the found user, then push the edited user?
+//         map over the array, when finding foundUser, return the new version
 //     }
 // })
 
